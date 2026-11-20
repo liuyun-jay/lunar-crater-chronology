@@ -1,17 +1,81 @@
 cff-version: 1.2.0
-message: "If you use this MATLAB software, please cite the repository and the source crater catalog."
+message: "如果本仓库的代码或其中任何图表对你的研究有帮助，请引用以下文献。"
+title: "lunar-crater-chronology: MATLAB 月球撞击坑统计定年流程"
 type: software
-title: "Lunar Crater Chronology: MATLAB Crater Size–Frequency Distributions and Age Estimation"
+abstract: >-
+  基于全月球撞击坑编目 LU1319373，在 MATLAB 中实现球面选区、累积尺寸—频率分布
+  （CSFD）构建、Neukum 年代模型反演、泊松蒙特卡洛不确定度评估与多倍率图件输出，
+  并包含合成数据回收自检与编目来源子集对照。
 authors:
   - family-names: Su
     given-names: Shilong
     affiliation: "North China University of Water Resources and Electric Power"
+license: MIT
+version: 1.0.0
+date-released: 2026-11-20
 repository-code: "https://github.com/liuyun-jay/lunar-crater-chronology"
 url: "https://github.com/liuyun-jay/lunar-crater-chronology"
-license: MIT
 keywords:
   - lunar chronology
+  - impact crater
   - crater size-frequency distribution
-  - MATLAB
-  - Neukum chronology
+  - CSFD
+  - Neukum production function
   - planetary science
+  - MATLAB
+references:
+  - type: dataset
+    title: "An Improved Global Catalog LU1319373 of Lunar Craters (>= 1 km) with 3D Morphometric Information of Craters"
+    authors:
+      - name: "Wang, Y."
+      - name: "Wu, B."
+    year: 2021
+    publisher:
+      name: Zenodo
+    doi: "10.5281/zenodo.4983248"
+    version: "1.0 (file LU1319373_Wang&Wu_2021.rar, md5 df786c981cb848a5151d0262dba22f5a)"
+  - type: article
+    title: "An Improved Global Catalog of Lunar Impact Craters (>= 1 km) With 3D Morphometric Information and Updates on Global Crater Analysis"
+    authors:
+      - name: "Wang, Y."
+      - name: "Wu, B."
+      - name: "Xue, H."
+      - name: "Li, X."
+      - name: "Ma, J."
+    year: 2021
+    journal: "Journal of Geophysical Research: Planets"
+    volume: 126
+    article-number: "e2020JE006728"
+    doi: "10.1029/2020JE006728"
+  - type: article
+    title: "Cratering records in the inner solar system in relation to the lunar reference system"
+    authors:
+      - name: "Neukum, G."
+      - name: "Ivanov, B. A."
+      - name: "Hartmann, W. K."
+    year: 2001
+    journal: "Space Science Reviews"
+    volume: 96
+    start: 55
+    end: 86
+    doi: "10.1023/A:1011989004263"
+  - type: article
+    title: "Two-billion-year-old volcanism on the Moon from Chang'e-5 basalts"
+    authors:
+      - name: "Li, Q.-L. et al."
+    year: 2021
+    journal: "Nature"
+    volume: 600
+    start: 79
+    end: 83
+    doi: "10.1038/s41586-021-04100-2"
+  - type: article
+    title: "Age and composition of young basalts on the Moon, measured from samples returned by Chang'e-5"
+    authors:
+      - name: "Che, X. et al."
+    year: 2021
+    journal: "Science"
+    volume: 374
+    start: 887
+    end: 890
+    doi: "10.1126/science.abl7957"

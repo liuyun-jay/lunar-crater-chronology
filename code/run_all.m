@@ -123,6 +123,12 @@ s09_plot_results(R, ST, cfg); % 绘制 CSFD 拟合曲线与年龄结果图
 s10_tables(R, ST, cfg); % 导出论文所需的结果表格
 save(fullfile(cfg.dirResults, 'results.mat'), 'R', 'ST', 'cfg', 'model', '-v7.3'); % 再次保存最新结果（含图表所需字段）
 
+% 可选步骤：基于已保存的 results.mat 重新生成 8 张论文插图（fig1_route 至 fig8_source_compare）
+if isfield(cfg, 'makeFigures') && cfg.makeFigures % 按配置决定是否生成论文插图
+   fprintf('\n---------- 生成论文插图（8 张，输出到 figures/）----------\n'); % 打印插图子标题
+   run(fullfile(here, 'make_paper_figures.m')); % 调用插图脚本；失败不影响前面的数值结果
+end % 结束插图生成判断
+
 fprintf('\n 全部完成，用时 %.1f 分钟。结果：%s\n', toc(t_start)/60, cfg.dirResults); % 报告总用时与结果目录
 
 % ------------------------------------------------------------------------

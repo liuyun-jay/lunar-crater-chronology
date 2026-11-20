@@ -5,7 +5,7 @@
 %     技术路线图、全月地图、CSFD、年龄对照、误差分布、敏感性、
 %     自检和编目来源对照图。这样后续只调整版式时不必重算年龄。
 % 输入：results/results.mat 与 data/processed/catalog.mat。
-% 输出：figures/fig1_route.png 至 fig8_source_compare.png。
+% 输出：figures/paper_fig1_route.png 至 paper_fig8_source_compare.png。
 % 使用：make_paper_figures。
 % ========================================================================
 %% MAKE_PAPER_FIGURES 生成论文全部插图的最终版本
@@ -77,7 +77,7 @@ text(ax, 9.45, 6.75, {'编目来源', '对照试验'}, 'HorizontalAlignment', 'c
 text(ax, 5.0, 0.55, '两项独立检验：先用合成数据证明算法正确，再用真实编目判断数据是否可靠', ... % 写底部总结文字
    'HorizontalAlignment', 'center', 'FontName', S.fontCN, 'FontSize', 8.5, ... % 设置总结文字对齐方式
    'Color', [0.40 0.40 0.40]); % 设置总结文字灰色
-exportgraphics(fig, fullfile(FIG, 'fig1_route.png'), 'Resolution', 300); % 导出图 1 PNG 图件
+exportgraphics(fig, fullfile(FIG, 'paper_fig1_route.png'), 'Resolution', 300); % 导出图 1 PNG 图件
 close(fig); % 关闭图 1 画布
 end % 结束技术路线图函数
 
@@ -133,7 +133,7 @@ lg = legend(ax, arrayfun(@(k) sprintf('%d %s', k, R(k).name), 1:numel(R), ... % 
     'FontName', S.fontCN, 'FontSize', 8, 'Box', 'off'); % 设置图例字体与无边框
 set(lg, 'Position', [0.05 0.075 0.80 0.055]); % 调整图例位置
 note_text(fig, S, '数据：LU1319373（Wang et al., 2021）；2°×2° 网格，经 5×5 格滑动平均；白区为无编目覆盖。'); % 写图 2 底部数据注记
-exportgraphics(fig, fullfile(FIG, 'fig2_catalog_map.png'), 'Resolution', 300); % 导出图 2 PNG 图件
+exportgraphics(fig, fullfile(FIG, 'paper_fig2_catalog_map.png'), 'Resolution', 300); % 导出图 2 PNG 图件
 close(fig); % 关闭图 2 画布
 end % 结束全月密度图函数
 
@@ -169,7 +169,7 @@ for k = 1:n % 遍历四个研究区
    end % 结束图例判断
 end % 结束研究区遍历
 note_text(fig, S, '拟合区间统一取 1–10 km；纵轴为累积密度，观测值误差棒为泊松 1σ。'); % 写图 3 底部方法注记
-exportgraphics(fig, fullfile(FIG, 'fig3_csfd.png'), 'Resolution', 300); % 导出图 3 PNG 图件
+exportgraphics(fig, fullfile(FIG, 'paper_fig3_csfd.png'), 'Resolution', 300); % 导出图 3 PNG 图件
 close(fig); % 关闭图 3 画布
 
 end % 结束 CSFD 图函数
@@ -208,7 +208,7 @@ lg = legend(ax, {'样品/文献参考年龄', '完整编目反演结果（误差
 set(lg, 'Position', [0.10 0.055 0.80 0.075]); % 调整图例位置
 panel_title(ax, S, '撞击坑定年结果与独立年龄对照'); % 设置图 4 标题文字
 note_text(fig, S, '完整编目普遍偏老；改用人工校核子集后，静海与风暴洋的结果分别改善为 3.64 Ga 与 3.36 Ga。'); % 写图 4 底部结论注记
-exportgraphics(fig, fullfile(FIG, 'fig4_age_compare.png'), 'Resolution', 300); % 导出图 4 PNG 图件
+exportgraphics(fig, fullfile(FIG, 'paper_fig4_age_compare.png'), 'Resolution', 300); % 导出图 4 PNG 图件
 close(fig); % 关闭图 4 画布
 end % 结束年龄对照图函数
 
@@ -250,7 +250,7 @@ lg = legend(hLeg, {'蒙特卡洛样本', '中位数', '样品年龄'}, 'Orientat
    'FontName', S.fontCN, 'FontSize', 8.5, 'Box', 'off'); % 设置图例字体与无边框
 lg.Layout.Tile = 'south'; % 把图例放到布局底部
 note_text(fig, S, '每次实现均对每个直径区间独立做泊松重采样后再累积、再拟合；统计误差远小于与样品年龄的偏差。'); % 写图 5 底部方法注记
-exportgraphics(fig, fullfile(FIG, 'fig5_montecarlo.png'), 'Resolution', 300); % 导出图 5 PNG 图件
+exportgraphics(fig, fullfile(FIG, 'paper_fig5_montecarlo.png'), 'Resolution', 300); % 导出图 5 PNG 图件
 close(fig); % 关闭图 5 画布
 end % 结束蒙特卡洛图函数
 
@@ -278,7 +278,7 @@ legend(ax, h, arrayfun(@(k) R(k).name, 1:n, 'UniformOutput', false), ... % 生�
    'Location', 'eastoutside', 'FontName', S.fontCN, 'FontSize', 9, 'Box', 'off'); % 图例放到轴外右侧
 panel_title(ax, S, '拟合区间对反演年龄的影响'); % 设置图 6 标题文字
 note_text(fig, S, '细点线为各区域样品年龄；拟合区间从 1–5 km 放宽到 1–20 km，年龄变化不超过 0.03 Ga。'); % 写图 6底部敏感性注记
-exportgraphics(fig, fullfile(FIG, 'fig6_sensitivity.png'), 'Resolution', 300); % 导出图 6 PNG 图件
+exportgraphics(fig, fullfile(FIG, 'paper_fig6_sensitivity.png'), 'Resolution', 300); % 导出图 6 PNG 图件
 close(fig); % 关闭图 6 画布
 end % 结束敏感性图函数
 
@@ -303,7 +303,7 @@ axis(ax, [0 4.5 0 4.5]); % 固定横纵轴范围
 xlabel(ax, '设定年龄 T_{true} (Ga)'); ylabel(ax, '反演年龄 T_{fit} (Ga)'); % 设置图 7 轴标签
 panel_title(ax, S, '合成数据回收试验：每个年龄 200 次实现'); % 设置图 7 标题文字
 note_text(fig, S, '虚线为 1:1 参考线；标注为反演偏差。3.7 Ga 处偏差仅 0.001 Ga，说明算法链本身无系统性错误。'); %写图 7 底部自检注记
-exportgraphics(fig, fullfile(FIG, 'fig7_selftest.png'), 'Resolution', 300); % 导出图 7 PNG 图件
+exportgraphics(fig, fullfile(FIG, 'paper_fig7_selftest.png'), 'Resolution', 300); % 导出图 7 PNG 图件
 close(fig); % 关闭图 7 画布
 end % 结束回收试验图函数
 
@@ -313,21 +313,25 @@ n = numel(R); % 研究区数量
 Nall = arrayfun(@(k) R(k).cs.N(1), 1:n); % 提取完整编目累积密度
 Nvet = arrayfun(@(k) R(k).vetted.cs.N(1), 1:n); % 提取校核子集累积密度
 
-fig = figure('Color', 'w', 'Position', [60 60 700 400], 'InvertHardcopy', 'off'); % 创建图 8 画布
-ax1 = axes(fig, 'Position', [0.075 0.20 0.34 0.66]); hold(ax1, 'on'); % 创建左侧密度子图
+fig = figure('Color', 'w', 'Position', [60 60 830 420], 'InvertHardcopy', 'off'); % 创建图 8 画布
+lab = arrayfun(@(k) short_label(R(k).name, k), 1:n, 'UniformOutput', false); % 生成短区域标签，避免长名称被裁切
+ax1 = axes(fig, 'Position', [0.135 0.21 0.355 0.65]); hold(ax1, 'on'); % 创建左侧密度子图，左侧留足标签宽度
 hb = barh(ax1, [(1:n)' - 0.16, (1:n)' + 0.16], [Nall(:) Nvet(:)], 0.30, ... % 绘制两组水平柱状图
    'EdgeColor', 'none'); % 设置柱状图无描边
 hb(1).FaceColor = S.palette(1, :); % 完整编目柱设为配色一
 hb(2).FaceColor = S.palette(5, :); % 校核子集柱设为配色五
-set(ax1, 'YTick', 1:n, 'YTickLabel', arrayfun(@(k) R(k).name, 1:n, 'UniformOutput', false), ... % 设置区域名称刻度标签
-   'YDir', 'reverse'); % 纵向刻度反向排列
+set(ax1, 'YTick', 1:n, 'YTickLabel', lab, 'YDir', 'reverse'); % 设置短标签刻度并反向排列
+xlim(ax1, [0 1.18 * max(Nall)]); % 右侧留出数值标注空间
 style_ax(ax1, S, 'XGrid', 'on', 'YGrid', 'off'); % 应用左图坐标轴样式
 xlabel(ax1, 'N(>1 km) (km^{-2})'); % 设置左图横轴标签
 panel_title(ax1, S, '(a) 撞击坑密度'); % 设置左子图标题
-legend(ax1, {'完整编目', '人工校核子集'}, 'FontName', S.fontCN, 'FontSize', 8.5, ... % 生成左图两项图例
-   'Box', 'off', 'Location', 'southeast'); % 设置左图图例位置
+for k = 1:n % 逐区域标注完整编目与校核子集的密度值
+   text(ax1, 1.02 * max(Nall), k, sprintf('%.3e / %.3e', Nall(k), Nvet(k)), ... % 两个数值并列写出
+      'FontName', S.fontCN, 'FontSize', 7.5, 'Color', [0.2 0.2 0.2], ... % 设置数值标注字体与颜色
+      'HorizontalAlignment', 'left', 'VerticalAlignment', 'middle'); % 左对齐并垂直居中
+end % 结束密度数值标注循环
 
-ax2 = axes(fig, 'Position', [0.575 0.20 0.34 0.66]); hold(ax2, 'on'); % 创建右侧偏差子图
+ax2 = axes(fig, 'Position', [0.575 0.21 0.295 0.65]); hold(ax2, 'on'); % 创建右侧偏差子图
 dF = arrayfun(@(k) R(k).fit.T - R(k).ref_age, 1:n); % 完整编目年龄偏差
 dV = arrayfun(@(k) R(k).vetted.fit.T - R(k).ref_age, 1:n); % 校核子集年龄偏差
 hb2 = barh(ax2, [(1:n)' - 0.16, (1:n)' + 0.16], [dF(:) dV(:)], 0.30, 'EdgeColor', 'none'); % 绘制偏差水平柱状图
@@ -335,15 +339,33 @@ hb2(1).FaceColor = S.palette(1, :); % 完整编目偏差柱配色
 hb2(2).FaceColor = S.palette(5, :); % 校核子集偏差柱配色
 plot(ax2, [0 0], [0.4 n + 0.6], '-', 'Color', [0.3 0.3 0.3], 'LineWidth', 1.0); % 画零偏差参考竖线
 set(ax2, 'YTick', 1:n, 'YTickLabel', {}, 'YDir', 'reverse'); % 设置右图刻度并隐藏标签
+xlim(ax2, [-0.7, max([dF(:); dV(:)]) + 1.25]); % 左端容纳负偏差，右端留出固定数值列
+% 固定数值列
+xt2 = xlim(ax2); % 记录横轴范围，供数值标注统一靠右对齐
 style_ax(ax2, S, 'XGrid', 'on', 'YGrid', 'off'); % 应用右图坐标轴样式
 xlabel(ax2, '反演年龄 − 样品年龄 (Ga)'); % 设置右图横轴标签
-panel_title(ax2, S, '(b) 与样品年龄的偏差'); % 设置右子图标题
-note_text(fig, S, ' 完整编目的撞击坑密度约为人工校核子集的 5 倍，导致年龄系统性偏老；改用校核子集后偏差明显缩小。'); % 写图 8 底部对照注记
-exportgraphics(fig, fullfile(FIG, 'fig8_source_compare.png'), 'Resolution', 300); % 导出图 8 PNG 图件
+panel_title(ax2, S, '(b) 年龄偏差'); % 右子图标题（正值偏老、负值偏年轻，含义见横轴）
+for k = 1:n % 逐区域标注两个年龄偏差值
+   text(ax2, xt2(2) - 0.05, k, sprintf('%+.2f / %+.2f', dF(k), dV(k)), ... % 两个偏差并列写出
+      'FontName', S.fontCN, 'FontSize', 7.5, 'Color', [0.2 0.2 0.2], ... % 设置数值标注字体与颜色
+      'HorizontalAlignment', 'right', 'VerticalAlignment', 'middle'); % 统一靠右对齐，形成固定数值列
+end % 结束偏差数值标注循环
+legend(ax1, {'完整编目', '人工校核子集'}, 'FontName', S.fontCN, 'FontSize', 8.5, ... % 生成两项图例
+   'Box', 'off', 'Location', 'southoutside', 'Orientation', 'horizontal'); % 图例放在左图下方，避免遮挡柱形
+note_text(fig, S, ' 完整编目的撞击坑密度约为人工校核子集的 5 倍，导致年龄系统性偏老；改用校核子集后偏差明显缩小。右图正值偏老、负值偏年轻。'); % 写图 8 底部对照注记
+exportgraphics(fig, fullfile(FIG, 'paper_fig8_source_compare.png'), 'Resolution', 300); % 导出图 8 PNG 图件
 close(fig); % 关闭图 8 画布
 end % 结束来源对照图函数
 
 %% ======================================================================
+function lab = short_label(long_name, idx) % 子函数：生成简短区域标签
+p = strsplit(char(long_name), '（'); % 在全角左括号处切分，取前半段作为短名
+p = p{1}; % 取出括号前的短名
+p = regexprep(p, '着陆区$', ''); % 去掉“着陆区”后缀，进一步压缩标签宽度
+circ = '①②③④⑤⑥⑦⑧⑨'; % 预置带圈序号字符序列
+if idx <= numel(circ), p = [circ(idx) ' ' p]; end % 加上带圈序号，便于与图中柱组对应
+lab = p; % 返回短标签
+end % 结束短标签函数
 function style_ax(ax, S, varargin) % 子函数：统一坐标轴样式
 set(ax, 'Color', 'w', 'XColor', 'k', 'YColor', 'k', 'ZColor', 'k', ... % 设置白底与黑色轴线
    'Box', 'off', 'TickDir', 'out', 'LineWidth', 0.8, ... % 去边框并让刻度朝外
