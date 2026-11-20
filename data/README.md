@@ -1,5 +1,24 @@
-# Data / 数据来源
+# Data Preparation | 数据准备
 
-The original LU1319373 global lunar crater catalog is **not redistributed** here. Obtain it from its original publisher, verify usage rights, and document source/version/units before analysis.
+本项目以 **LU1319373** 全月撞击坑编目为数据基础，研究报告使用约 **1,319,373** 条记录（名义直径下限约 1 km）。
 
-The `code/config.m` default input location is `data/raw/LU1319373/LU1319373_Wang & Wu_2021.txt`. Create this local folder and place the original data file there, or edit `cfg.rawCatalog` accordingly. Cached `.mat` data and locally generated outputs are ignored by Git.
+## 获取与存放
+
+请从原始数据发布方获取编目文件，按照其引用与分发要求使用。为方便代码管理，本仓库保留数据路径和读取脚本，**不重复分发第三方原始编目**。
+
+默认路径：
+
+    data/raw/LU1319373/LU1319373_Wang & Wu_2021.txt
+
+若本地文件名或路径不同，可直接修改 `code/config.m` 中的 `cfg.rawCatalog`。程序的缓存文件存于 `data/processed/`，已配置 Git 忽略规则。
+
+## 输入数据检查
+
+建议记录来源版本、文件哈希和文献引用，并核对：
+
+- 月固坐标系，经度、纬度字段；
+- 撞击坑直径单位（米或千米）；
+- 记录来源代码及子集筛选方式；
+- 各研究区的完整性与空间覆盖范围。
+
+你可以使用 `code/test_synthetic.m` 在不依赖外部编目的情况下体验模型计算和统计检验流程。
