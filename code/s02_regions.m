@@ -43,8 +43,7 @@ for k = 1:numel(cfg.regions) % 遍历配置中的四个研究区
   R(k).ref_age = reg.ref_age; % 保存参考年龄（Ga）
   R(k).ref_age_src = reg.ref_age_src; % 保存参考年龄来源说明
 
-  fprintf(' 区域「%s」：中心 (%.3f°, %.3f°) ，半径 %.0f km ，面积 %.0f km² ，坑数 %d\n', ... % 打印区域名称、中心坐
-标、半径、面积与坑数
+  fprintf(' 区域「%s」：中心 (%.3f°, %.3f°) ，半径 %.0f km ，面积 %.0f km² ，坑数 %d\n', ... % 打印区域名称、中心坐标、半径、面积与坑数
     reg.name, reg.lat, reg.lon, reg.radius_km, A, R(k).n); % 填入区域统计量输出参数
 end % 结束逐区域循环
 end % 结束研究区选取函数

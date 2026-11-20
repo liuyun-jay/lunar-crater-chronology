@@ -17,6 +17,5 @@
  % 生产函数多项式本身对应 1 Ga 参考表面，若直接乘以 CF(T) 会低估模型密度
  % 约 3 个数量级，反演出的年龄将严重偏大。
 
- N = npf_cumulative(D_km, model.npf_coeff) .* (model.CF(T_Ga) ./ model.CF_1Ga); % NPF 密度乘以 CF(T)/CF(1 Ga) 完成
- 归一化
+ N = npf_cumulative(D_km, model.npf_coeff) .* (model.CF(T_Ga) ./ model.CF_1Ga); % NPF 密度乘以 CF(T)/CF(1 Ga) 完成 归一化
  end % 结束模型 CSFD 计算

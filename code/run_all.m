@@ -44,14 +44,12 @@ R = s02_regions(cat, cfg); % 用大圆距离与球冠面积圈出四个研究区
 fprintf('\n========== 步骤 3/8：合成数据自检（验证算法链） ==========\n'); % 打印步骤标题：合成数据自检
 ST = s07_selftest(model, cfg.selftest); % 用已知年龄合成数据验证算法链无系统偏差
 
-fprintf('\n========== 步骤 4/8：逐区域构建 CSFD 并反演年龄 ==========\n'); % 打印步骤标题：逐区域构建 CSFD 并
-反演年龄
+fprintf('\n========== 步骤 4/8：逐区域构建 CSFD 并反演年龄 ==========\n'); % 打印步骤标题：逐区域构建 CSFD 并反演年龄
 nR = numel(R); % 统计研究区个数，作为循环上界
 for k = 1:nR % 逐个研究区执行定年
    R(k).cs = s03_csfd(R(k).D, R(k).area_km2, cfg.csfd); % 构建该区域的对数分箱 CSFD
    R(k).fit = s05_fit_age(R(k).cs.D, R(k).cs.n_cum, R(k).cs.area_km2, model, cfg.fit); % 加权最小二乘反演该区域模式年龄
-   fprintf(' 「%s」：N(>1 km) = %.3e km^-2 ，最佳拟合年龄 %.3f Ga（拟合点数 %d）\n', ... % 打印区域名、N(>1 km) 与
-拟合年龄
+   fprintf(' 「%s」：N(>1 km) = %.3e km^-2 ，最佳拟合年龄 %.3f Ga（拟合点数 %d）\n', ... % 打印区域名、N(>1 km) 与拟合年龄
      R(k).name, R(k).cs.N(1), R(k).fit.T, R(k).fit.npts); % 依次填入区域名、密度、年龄与拟合点数
 end % 结束逐区域定年循环
 
@@ -59,8 +57,7 @@ fprintf('\n========== 步骤 5/8：蒙特卡洛误差传播 ==========\n'); % �
 for k = 1:nR % 逐区域做蒙特卡洛重采样
    R(k).mc = s06_montecarlo(R(k).cs.counts, R(k).cs.D, R(k).cs.area_km2, ... % 传入每箱泊松计数等参数准备重采样
                  model, cfg.fit, cfg.mc); % 继续传入模型、拟合与蒙特卡洛参数
-   fprintf(' 「%s」：年龄 %.3f (中位) / 16–84%% 区间 [%.3f, %.3f] Ga，1σ = %.3f Ga\n', ... % 打印中位年龄、16–84% 区
-间与 1σ
+   fprintf(' 「%s」：年龄 %.3f (中位) / 16–84%% 区间 [%.3f, %.3f] Ga，1σ = %.3f Ga\n', ... % 打印中位年龄、16–84% 区间与 1σ
      R(k).name, R(k).mc.T_med, R(k).mc.T_lo, R(k).mc.T_hi, R(k).mc.T_std); % 填入区域名与蒙特卡洛统计量
 end % 结束蒙特卡洛循环
 
@@ -73,8 +70,7 @@ catV.lon = cat.lon(selVetted); catV.lat = cat.lat(selVetted); catV.D = cat.D(sel
 Rv = s02_regions(catV, cfg); % 用同一套球面几何重新圈四个研究区
 for k = 1:nR % 逐区域比较完整编目与校核子集
    Rv(k).cs = s03_csfd(Rv(k).D, Rv(k).area_km2, cfg.csfd); % 对人工校核子集构建 CSFD
-   Rv(k).fit = s05_fit_age(Rv(k).cs.D, Rv(k).cs.n_cum, Rv(k).cs.area_km2, model, cfg.fit); % 对校核子集反演年龄，作为系统
-误差对照
+   Rv(k).fit = s05_fit_age(Rv(k).cs.D, Rv(k).cs.n_cum, Rv(k).cs.area_km2, model, cfg.fit); % 对校核子集反演年龄，作为系统误差对照
    R(k).vetted = Rv(k); % 把校核子集结果挂到主结果结构体上
    fprintf(' 「%s」：人工校核子集 %d 个坑，N(>1km)=%.3e，年龄 %.2f Ga\n', ... % 打印校核子集坑数与反演年龄
       R(k).name, Rv(k).n, Rv(k).cs.N(1), Rv(k).fit.T); % 填入区域名、坑数、N(>1km) 与年龄
@@ -90,8 +86,7 @@ for k = 1:nR % 逐区域遍历敏感性方案
       f = s05_fit_age(R(k).cs.D, R(k).cs.n_cum, R(k).cs.area_km2, model, fopt); % 在该区间内重新反演年龄
       R(k).sens(j, :) = [ranges(j, 1), ranges(j, 2), f.T, f.npts]; % 保存区间上下限、年龄与拟合点数
    end % 结束单区域敏感性方案循环
-   fprintf(' 「%s」：拟合区间 1–5 km → %.2f Ga；1–10 km → %.2f Ga；1–20 km → %.2f Ga\n', ... % 打印三组典型区间
-的年龄对比
+   fprintf(' 「%s」：拟合区间 1–5 km → %.2f Ga；1–10 km → %.2f Ga；1–20 km → %.2f Ga\n', ... % 打印三组典型区间的年龄对比
       R(k).name, R(k).sens(1,3), R(k).sens(2,3), R(k).sens(3,3)); % 填入区域名与 1–5、1–10、1–20 km 年龄
 end % 结束逐区域敏感性循环
 
@@ -112,8 +107,7 @@ for k = 1:nR % 逐区域扫描不同统计半径
       Rk = s02_regions(cat, cfgR); % 按新半径重新圈定研究区
       csR = s03_csfd(Rk.D, Rk.area_km2, cfg.csfd); % 重新构建该半径下的 CSFD
       fitR = s05_fit_age(csR.D, csR.n_cum, csR.area_km2, model, cfg.fit); % 重新反演该半径下的年龄
-      rows(end+1, :) = {R(k).key, radii(ir), Rk.area_km2, Rk.n, fitR.T}; %#ok<AGROW> ；追加一行：区域键、半径、面积、
-坑数、年龄
+      rows(end+1, :) = {R(k).key, radii(ir), Rk.area_km2, Rk.n, fitR.T}; %#ok<AGROW> ；追加一行：区域键、半径、面积、坑数、年龄
    end % 结束单区域半径循环
 end % 结束逐区域半径扫描
 cfg.radiusSens = cell2table(rows, 'VariableNames', ... % 把半径敏感性结果整理成表格

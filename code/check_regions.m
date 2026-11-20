@@ -45,8 +45,7 @@ for k = 1:numel(cfg.regions) % 遍历每个候选区域
         srcStr = [srcStr, sprintf('S%d:%d ', s, sum(cat.source(in) == s))]; %#ok<AGROW>；累加各来源坑数
      end % 结束来源循环
 
-    fprintf(' 半径 %3d km：面积 %7.0f km²，坑数 %5d，N(>1km)=%.3e，拟合年龄 %.2f Ga（%d 点） 来源 %s\n', ... %
-打印面积坑数年龄与来源
+    fprintf(' 半径 %3d km：面积 %7.0f km²，坑数 %5d，N(>1km)=%.3e，拟合年龄 %.2f Ga（%d 点） 来源 %s\n', ... %打印面积坑数年龄与来源
       r, Rk.area_km2, Rk.n, cs.N(1), fit.T, fit.npts, srcStr); % 代入各统计量
     rows(end+1, :) = {reg.key, r, Rk.area_km2, Rk.n, cs.N(1), fit.T, fit.npts}; %#ok<AGROW>；追加一行结果记录
   end % 结束半径循环
