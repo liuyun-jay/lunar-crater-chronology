@@ -1,0 +1,34 @@
+name: MATLAB static analysis and synthetic test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  matlab-validation:
+    name: Lint and synthetic workflow (R2025a)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup MATLAB R2025a
+        uses: matlab-actions/setup-matlab@v3
+        with:
+          release: R2025a
+
+      - name: Analyze source and check configuration
+        uses: matlab-actions/run-command@v3
+        with:
+          command: run('ci/check_matlab_sources.m')
+
+      - name: Run synthetic crater-age workflow
+        uses: matlab-actions/run-command@v3
+        with:
+          command: run('code/test_synthetic.m')
