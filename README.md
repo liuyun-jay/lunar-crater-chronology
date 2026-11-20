@@ -2,7 +2,9 @@
 ### 基于 MATLAB 的月球撞击坑统计定年与月海年龄估算
 **Lunar Surface Age Estimation from Crater Size–Frequency Distributions**
 
-`MATLAB R2025a` · `Planetary Science` · `CSFD` · `Neukum Chronology` · `Monte Carlo`
+`MATLAB R2025a` · `Planetary Science` · `CSFD` · `Neukum Chronology` · `Monte Carlo` · `MIT License`
+
+[![MATLAB CI](https://github.com/liuyun-jay/lunar-crater-chronology/actions/workflows/matlab-ci.yml/badge.svg)](https://github.com/liuyun-jay/lunar-crater-chronology/actions/workflows/matlab-ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 本项目围绕一个核心科学问题：**如何利用撞击坑统计信息推断月球表面年龄，以及如何判断这些结果是否可靠？**
 
@@ -38,7 +40,7 @@ This MATLAB research project develops an integrated computational workflow for l
 
 **01 · 合成数据验证**
 
-在给定年代模型的合成数据回收实验中，研究报告所列各测试年龄的平均恢复偏差约在 **0.05 Ga 以内**，为算法实现提供了独立于真实编目质量的检查。
+在生产自检配置（**7×10⁴ km²**、每个年龄 **200 次**合成实现）下，5 个设定年龄的**平均绝对偏差为 0.029 Ga，最大为 0.046 Ga**。这一回收检验为数值反演链路提供了定量验证；快速测试采用较小面积和 60 次实现，结果可能不同。
 
 **02 · 编目来源影响年龄反演**
 
@@ -46,7 +48,19 @@ This MATLAB research project develops an integrated computational workflow for l
 
 **03 · 探索方法适用范围**
 
-嫦娥五号年轻玄武岩区域的模型年龄与样品年龄差异显著。项目结合区域尺度、地质单元混合和撞击坑直径下限，分析了为何年轻月表需要更高分辨率编目。
+嫦娥五号区域的完整编目模式年龄约 **3.78 Ga**，而样品参考年龄约 **2.03 Ga**，差异为 **1.75 Ga**。这不是一次可以忽略的误差，而是研究的关键案例：约 120 km 的圆形统计区与 ≥1 km 编目可能混合多个地质单元，展示了**数据分辨率、统计区域和地质背景对模型年龄解释的影响**。
+
+**合成自检数据（生产配置）**
+
+| 设定年龄 (Ga) | 平均反演年龄 (Ga) | 1σ (Ga) | 平均偏差 (Ga) |
+|---:|---:|---:|---:|
+| 0.50 | 0.539 | 0.139 | +0.039 |
+| 1.00 | 1.046 | 0.201 | +0.046 |
+| 2.00 | 2.024 | 0.268 | +0.024 |
+| 3.00 | 2.967 | 0.206 | −0.033 |
+| 3.70 | 3.699 | 0.010 | −0.001 |
+
+*结果来自 MATLAB R2025a 的项目复核记录；每个年龄重复 200 次，面积 70,000 km²，随机种子 20260922。*
 
 详见 [Research insights / 研究发现与方法思考](docs/RESEARCH_INSIGHTS.md)。
 
@@ -80,6 +94,10 @@ This MATLAB research project develops an integrated computational workflow for l
 
     lunar-crater-chronology/
     ├── README.md                  # 项目介绍与结果展示
+    ├── LICENSE                    # MIT 开源许可
+    ├── CITATION.cff               # 软件引用信息
+    ├── .github/workflows/         # MATLAB 静态检查与合成测试
+    ├── ci/                        # 检查脚本
     ├── assets/                    # 8 张研究结果图（PNG）
     ├── code/                      # 26 个 MATLAB 源文件
     │   ├── config.m              # 区域、路径及参数配置
@@ -92,11 +110,11 @@ This MATLAB research project develops an integrated computational workflow for l
 
 ## 🚀 Getting started · 运行指南
 
-**Environment:** MATLAB R2025a（项目使用 MATLAB 内置函数，无额外工具箱需求）。
+**Environment:** MATLAB R2025a。仓库使用的 `prctile` 自 R2022a 起属于 MATLAB 基础功能；自动检查基于 R2025a 设置。
 
 **1. 准备撞击坑编目**
 
-参考 [数据来源与准备说明](data/README.md) 获取原始 **LU1319373** 全月撞击坑编目，并放入以下路径：
+从 [数据来源与准备说明](data/README.md) 中提供的 **Wang 等的 LU1319373 Zenodo 数据集** 获取压缩包，核对版本、解压后的字段与单位，再将对应编目放入以下路径：
 
     data/raw/LU1319373/LU1319373_Wang & Wu_2021.txt
 
@@ -115,6 +133,15 @@ This MATLAB research project develops an integrated computational workflow for l
     run('code/test_synthetic.m')
 
 运行过程会按配置生成结果缓存、表格和绘图文件。报告附录中的 MATLAB 源码已整理到 `code/`，适合进一步阅读、复核与扩展。
+
+## 🔁 Reproducibility & citation · 复现与引用
+
+- [Data & provenance / 数据集下载、版本与校验值](data/README.md)
+- [Reproduction guide / 两种自检配置及脚本入口](docs/REPRODUCIBILITY.md)
+- [Research insights / 模型适用边界与对照实验](docs/RESEARCH_INSIGHTS.md)
+- [Cite this software / 引用本项目](CITATION.cff) · [MIT license](LICENSE)
+
+提交或 PR 会触发 MATLAB 静态错误检查和不依赖外部编目的合成数据端到端测试。对于完整编目实验，按数据说明准备外部编目并运行 `run_all.m`；项目图件展示了研究报告使用的分析流程与结果。
 
 ## 🌌 Why this project? · 项目价值
 

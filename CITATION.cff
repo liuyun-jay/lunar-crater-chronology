@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this MATLAB software, please cite the repository and the source crater catalog."
+type: software
+title: "Lunar Crater Chronology: MATLAB Crater Size–Frequency Distributions and Age Estimation"
+authors:
+  - family-names: Su
+    given-names: Shilong
+    affiliation: "North China University of Water Resources and Electric Power"
+repository-code: "https://github.com/liuyun-jay/lunar-crater-chronology"
+url: "https://github.com/liuyun-jay/lunar-crater-chronology"
+license: MIT
+keywords:
+  - lunar chronology
+  - crater size-frequency distribution
+  - MATLAB
+  - Neukum chronology
+  - planetary science
