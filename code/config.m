@@ -63,6 +63,9 @@ cfg.fit.TgridN = 400; % 年龄粗扫描网格点数（对数等距）
 cfg.mc.niter = 1000; % 蒙特卡洛重采样次数
 cfg.mc.seed = 20260922; % 随机种子，保证结果可复现
 
+% ---- 论文插图 ----
+cfg.makeFigures = true; % 是否在流程末尾调用 make_paper_figures 生成 8 张论文插图
+
 % ---- 合成数据自检 ----
 cfg.selftest.Tlist = [0.5 1.0 2.0 3.0 3.7]; % 自检使用的已知合成年龄（Ga）
 cfg.selftest.Dlo = 1.0; % 自检合成编目直径下限（km）

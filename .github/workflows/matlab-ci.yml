@@ -1,34 +1,53 @@
-name: MATLAB static analysis and synthetic test
+# MATLAB static checks and synthetic end-to-end test.
+# The full LU1319373 catalog is external and is not downloaded by CI.
+name: MATLAB CI
 
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  matlab-validation:
-    name: Lint and synthetic workflow (R2025a)
+  lint-and-test:
+    name: Static check and synthetic test (R2025a)
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Setup MATLAB R2025a
+      - name: Set up MATLAB R2025a
         uses: matlab-actions/setup-matlab@v3
         with:
           release: R2025a
 
-      - name: Analyze source and check configuration
+      - name: Static check gate
         uses: matlab-actions/run-command@v3
         with:
-          command: run('ci/check_matlab_sources.m')
+          command: |
+            addpath('tools');
+            lint_all('code', 'lint-report.txt');
 
-      - name: Run synthetic crater-age workflow
+      - name: Synthetic end-to-end test
         uses: matlab-actions/run-command@v3
         with:
-          command: run('code/test_synthetic.m')
+          command: |
+            run('code/test_synthetic.m');
+
+      - name: Upload lint report and test figures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: matlab-artifacts
+          path: |
+            lint-report.txt
+            figures/_test/*.png
+          if-no-files-found: warn

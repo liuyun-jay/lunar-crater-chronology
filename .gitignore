@@ -3,6 +3,7 @@ data/raw/*
 data/processed/
 results/
 figures/
+lint-report.txt
 *.asv
 *.mat
 .DS_Store

@@ -19,3 +19,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+Third-party data and references are not covered by this license:
+
+- The crater catalog LU1319373 (Wang et al., 2021) is distributed by its
+  authors through Zenodo (DOI 10.5281/zenodo.4983248) and is not redistributed
+  in this repository. Users must follow the terms stated on the Zenodo record.
+- The chronology coefficients implemented in code/s04_model.m come from
+  Neukum et al. (2001), a published equation set; no third-party source code
+  is bundled in this repository.
+- The 8 PNG figures under assets/ are original output of this project and are
+  covered by the MIT license above.
