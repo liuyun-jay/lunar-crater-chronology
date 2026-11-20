@@ -28,8 +28,7 @@ function fit = s05_fit_age(D_km, n_cum, area_km2, model, opt) % 函数声明：�
 % 权重：累积计数 N_cum 的泊松标准差为 sqrt(N_cum)，在对数域中
 % sigma(log10 N) ≈ 0.4343/sqrt(N_cum)，故权重 w ∝ N_cum。
 
-mask = (D_km >= opt.Dfit_min) & (D_km <= opt.Dfit_max) & (n_cum > 0) & isfinite(n_cum); % 筛选拟合区间内、计数为正
-且有限的累积点
+mask = (D_km >= opt.Dfit_min) & (D_km <= opt.Dfit_max) & (n_cum > 0) & isfinite(n_cum); % 筛选拟合区间内、计数为正且有限的累积点
 
 D_u = D_km(mask); % 取出参与拟合的直径
 n_u = n_cum(mask); % 取出参与拟合的累积坑数

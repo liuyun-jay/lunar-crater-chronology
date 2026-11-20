@@ -28,8 +28,7 @@ RADIUS = 120;                % 用较大半径以保证统计量
 Dprobe = [1 1.5 2 3 5 8 12 20]; % 用于比较的直径节点
 dminList = [1 1.5 2 3 4 5 6 8]; % 拟合下限扫描
 
-fprintf('\n============ 诊断 1：观测 CSFD 与参考年龄模型对比（半径 %d km）============\n', RADIUS); % 打印
-诊断 1 标题
+fprintf('\n============ 诊断 1：观测 CSFD 与参考年龄模型对比（半径 %d km）============\n', RADIUS); % 打印诊断 1 标题
 for k = 1:numel(cfg.regions) % 遍历各研究区
    reg = cfg.regions(k); % 取当前区域
    cfgR = cfg; cfgR.regions = reg; cfgR.regions.radius_km = RADIUS; % 配置区域与统一半径

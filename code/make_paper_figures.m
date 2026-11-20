@@ -53,7 +53,6 @@ y0 = 11.05; h = 1.26; gap = 0.36; % 设置方框纵向布局参数
 for i = 1:size(ttl, 1) % 遍历七个流程步骤
     yy = y0 - (i - 1) * (h + gap); % 计算当前方框纵坐标
     rectangle(ax, 'Position', [1.15 yy 7.7 h], 'Curvature', 0.12, ... % 绘制流程步骤方框
-
        'FaceColor', [0.968 0.975 0.986], 'EdgeColor', [0.36 0.47 0.62], 'LineWidth', 1.0); % 设置方框填充与描边样式
    text(ax, 5.0, yy + h * 0.68, ttl{i, 1}, 'HorizontalAlignment', 'center', ... % 写步骤标题文字
        'FontName', S.fontCNB, 'FontSize', 10.5, 'Color', 'k'); % 设置标题字体与字号
@@ -105,8 +104,7 @@ vv = v(isfinite(v)); % 提取有效密度值
 lo = prctile(vv, 5); hi = prctile(vv, 95); % 按数据分位数取色标，避免整图偏暗
 
 % 浅色顺序色标：低密度（月海）冷浅、高密度（高地）暖深
-c = [0.905 0.935 0.965; 0.985 0.985 0.975; 0.980 0.900 0.760; 0.930 0.715 0.500; 0.800 0.450 0.360; 0.600 0.260 0.260]; % 定义
-六节点顺序色标
+c = [0.905 0.935 0.965; 0.985 0.985 0.975; 0.980 0.900 0.760; 0.930 0.715 0.500; 0.800 0.450 0.360; 0.600 0.260 0.260]; % 定义六节点顺序色标
 cmap = interp1(linspace(0,1,size(c,1)), c, linspace(0,1,160)); % 插值生成一百六十级色标
 imagesc(ax, edgesLon(1:end-1)+1, edgesLat(1:end-1)+1, v); % 绘制全球密度栅格图
 set(ax, 'YDir', 'normal'); % 纬度轴改为正方向
@@ -134,8 +132,7 @@ lg = legend(ax, arrayfun(@(k) sprintf('%d %s', k, R(k).name), 1:numel(R), ... % 
     'UniformOutput', false), 'Location', 'southoutside', 'Orientation', 'horizontal', ... % 图例参数续行
     'FontName', S.fontCN, 'FontSize', 8, 'Box', 'off'); % 设置图例字体与无边框
 set(lg, 'Position', [0.05 0.075 0.80 0.055]); % 调整图例位置
-note_text(fig, S, '数据：LU1319373（Wang et al., 2021）；2°×2° 网格，经 5×5 格滑动平均；白区为无编目覆盖。'); % 写
-图 2 底部数据注记
+note_text(fig, S, '数据：LU1319373（Wang et al., 2021）；2°×2° 网格，经 5×5 格滑动平均；白区为无编目覆盖。'); % 写图 2 底部数据注记
 exportgraphics(fig, fullfile(FIG, 'fig2_catalog_map.png'), 'Resolution', 300); % 导出图 2 PNG 图件
 close(fig); % 关闭图 2 画布
 end % 结束全月密度图函数
@@ -210,8 +207,7 @@ lg = legend(ax, {'样品/文献参考年龄', '完整编目反演结果（误差
    'FontSize', 9, 'Box', 'off'); % 设置图例字号与无边框
 set(lg, 'Position', [0.10 0.055 0.80 0.075]); % 调整图例位置
 panel_title(ax, S, '撞击坑定年结果与独立年龄对照'); % 设置图 4 标题文字
-note_text(fig, S, '完整编目普遍偏老；改用人工校核子集后，静海与风暴洋的结果分别改善为 3.64 Ga 与 3.36 Ga。'); % 写
-图 4 底部结论注记
+note_text(fig, S, '完整编目普遍偏老；改用人工校核子集后，静海与风暴洋的结果分别改善为 3.64 Ga 与 3.36 Ga。'); % 写图 4 底部结论注记
 exportgraphics(fig, fullfile(FIG, 'fig4_age_compare.png'), 'Resolution', 300); % 导出图 4 PNG 图件
 close(fig); % 关闭图 4 画布
 end % 结束年龄对照图函数
@@ -253,8 +249,7 @@ end % 结束研究区遍历
 lg = legend(hLeg, {'蒙特卡洛样本', '中位数', '样品年龄'}, 'Orientation', 'horizontal', ... % 生成三项统一图例
    'FontName', S.fontCN, 'FontSize', 8.5, 'Box', 'off'); % 设置图例字体与无边框
 lg.Layout.Tile = 'south'; % 把图例放到布局底部
-note_text(fig, S, '每次实现均对每个直径区间独立做泊松重采样后再累积、再拟合；统计误差远小于与样品年龄的偏
-差。'); % 写图 5 底部方法注记
+note_text(fig, S, '每次实现均对每个直径区间独立做泊松重采样后再累积、再拟合；统计误差远小于与样品年龄的偏差。'); % 写图 5 底部方法注记
 exportgraphics(fig, fullfile(FIG, 'fig5_montecarlo.png'), 'Resolution', 300); % 导出图 5 PNG 图件
 close(fig); % 关闭图 5 画布
 end % 结束蒙特卡洛图函数
@@ -282,8 +277,7 @@ ylim(ax, [1.6 4.4]); % 固定年龄显示范围
 legend(ax, h, arrayfun(@(k) R(k).name, 1:n, 'UniformOutput', false), ... % 生成四区图例
    'Location', 'eastoutside', 'FontName', S.fontCN, 'FontSize', 9, 'Box', 'off'); % 图例放到轴外右侧
 panel_title(ax, S, '拟合区间对反演年龄的影响'); % 设置图 6 标题文字
-note_text(fig, S, '细点线为各区域样品年龄；拟合区间从 1–5 km 放宽到 1–20 km，年龄变化不超过 0.03 Ga。'); % 写图 6
-底部敏感性注记
+note_text(fig, S, '细点线为各区域样品年龄；拟合区间从 1–5 km 放宽到 1–20 km，年龄变化不超过 0.03 Ga。'); % 写图 6底部敏感性注记
 exportgraphics(fig, fullfile(FIG, 'fig6_sensitivity.png'), 'Resolution', 300); % 导出图 6 PNG 图件
 close(fig); % 关闭图 6 画布
 end % 结束敏感性图函数
@@ -308,8 +302,7 @@ style_ax(ax, S); % 应用统一坐标轴样式
 axis(ax, [0 4.5 0 4.5]); % 固定横纵轴范围
 xlabel(ax, '设定年龄 T_{true} (Ga)'); ylabel(ax, '反演年龄 T_{fit} (Ga)'); % 设置图 7 轴标签
 panel_title(ax, S, '合成数据回收试验：每个年龄 200 次实现'); % 设置图 7 标题文字
-note_text(fig, S, '虚线为 1:1 参考线；标注为反演偏差。3.7 Ga 处偏差仅 0.001 Ga，说明算法链本身无系统性错误。'); %
-写图 7 底部自检注记
+note_text(fig, S, '虚线为 1:1 参考线；标注为反演偏差。3.7 Ga 处偏差仅 0.001 Ga，说明算法链本身无系统性错误。'); %写图 7 底部自检注记
 exportgraphics(fig, fullfile(FIG, 'fig7_selftest.png'), 'Resolution', 300); % 导出图 7 PNG 图件
 close(fig); % 关闭图 7 画布
 end % 结束回收试验图函数
@@ -345,8 +338,7 @@ set(ax2, 'YTick', 1:n, 'YTickLabel', {}, 'YDir', 'reverse'); % 设置右图刻�
 style_ax(ax2, S, 'XGrid', 'on', 'YGrid', 'off'); % 应用右图坐标轴样式
 xlabel(ax2, '反演年龄 − 样品年龄 (Ga)'); % 设置右图横轴标签
 panel_title(ax2, S, '(b) 与样品年龄的偏差'); % 设置右子图标题
-note_text(fig, S, ' 完整编目的撞击坑密度约为人工校核子集的 5 倍，导致年龄系统性偏老；改用校核子集后偏差明显缩
-小。'); % 写图 8 底部对照注记
+note_text(fig, S, ' 完整编目的撞击坑密度约为人工校核子集的 5 倍，导致年龄系统性偏老；改用校核子集后偏差明显缩小。'); % 写图 8 底部对照注记
 exportgraphics(fig, fullfile(FIG, 'fig8_source_compare.png'), 'Resolution', 300); % 导出图 8 PNG 图件
 close(fig); % 关闭图 8 画布
 end % 结束来源对照图函数
@@ -356,7 +348,6 @@ function style_ax(ax, S, varargin) % 子函数：统一坐标轴样式
 set(ax, 'Color', 'w', 'XColor', 'k', 'YColor', 'k', 'ZColor', 'k', ... % 设置白底与黑色轴线
    'Box', 'off', 'TickDir', 'out', 'LineWidth', 0.8, ... % 去边框并让刻度朝外
    'FontName', S.fontCN, 'FontSize', S.fsTick, ... % 设置统一字体与刻度字号
-
    'GridColor', S.gridCol, 'GridAlpha', 1, 'GridLineStyle', ':', ... % 设置浅灰点状网格
    'XGrid', 'on', 'YGrid', 'on', 'Layer', 'top'); % 打开网格并置顶图层
 if ~isempty(varargin), set(ax, varargin{:}); end % 应用调用方附加设置

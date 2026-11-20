@@ -26,7 +26,6 @@
         'defaultFigureInvertHardcopy', 'off', ... % 导出时保持原始配色
         'defaultAxesColor', 'w', ... % 坐标区背景设为白色
         'defaultAxesXColor', 'k', 'defaultAxesYColor', 'k', 'defaultAxesZColor', 'k', ... % 坐标轴与刻度统一为黑色
-
       'defaultTextColor', 'k', ... % 文字颜色统一为黑色
       'defaultAxesGridColor', [0.65 0.65 0.65], ... % 网格线设为浅灰色
       'defaultAxesFontName', 'SimSun', 'defaultTextFontName', 'SimSun', ... % 全局字体统一为宋体
@@ -86,7 +85,6 @@ for k = 1:numel(R) % 逐区域生成单幅 CSFD 图
    grid(ax, 'on'); box(ax, 'on'); % 打开网格与坐标框
    xlabel(ax, '撞击坑直径 D (km)'); ylabel(ax, '累积密度 N(>D) (km^{-2})'); % 标注横纵轴物理量
    title(ax, sprintf('%s\n 观测 CSFD 与模型拟合（T = %.2f Ga）', R(k).name, fit.T), ... % 标题为区名与拟合年龄
-
      'FontName', 'SimSun', 'FontSize', fs + 1.5); % 设置标题字体与字号
   legend(ax, [hObs hModel hPatch], ... % 生成观测、模型与区间图例
      {'观测值（泊松 1\sigma）', '模型 CSFD', '拟合区间'}, ... % 图例三行说明文字
@@ -184,8 +182,7 @@ for k = 1:n % 逐区域绘制年龄分布
        R(k).mc.T_med, R(k).mc.T_med - R(k).mc.T_lo, R(k).mc.T_hi - R(k).mc.T_med), ... % 代入中位年龄与分位数
        'FontSize', fs + 0.5); % 设置标题字号
 end % 结束区域循环
-legend(nexttile(tl, 1), {'蒙特卡洛样本', '中位数', '样品年龄'}, 'FontName', 'SimSun', 'FontSize', fs - 0.5); % 在第一子图添加三
-项图例
+legend(nexttile(tl, 1), {'蒙特卡洛样本', '中位数', '样品年龄'}, 'FontName', 'SimSun', 'FontSize', fs - 0.5); % 在第一子图添加三项图例
 exportgraphics(fig, fullfile(cfg.dirFigures, 'fig6_montecarlo.png'), 'Resolution', 300); % 导出图 6 蒙特卡洛图
 close(fig); % 关闭图 6 窗口
 
