@@ -1,0 +1,9 @@
+data/raw/*
+!data/raw/.gitkeep
+data/processed/
+results/
+figures/
+*.asv
+*.mat
+.DS_Store
+Thumbs.db
